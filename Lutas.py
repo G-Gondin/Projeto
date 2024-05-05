@@ -127,7 +127,7 @@ Dado do monstro: {dc}
 Dado do mestre: {dm}
 """)
 
-        # definição de ataque
+        # definição de ataque player
         if dj == dm:
             atkp = forçp + dexp
         else:
@@ -136,7 +136,7 @@ Dado do mestre: {dm}
             if dj < dm:
                 atkp = (forçp / 2) + (dexp / 2)
 
-        # definição da força de ataque
+        # definição da força de ataque player
         if dj == dc:
             fatkp = atkp
         else:
@@ -145,7 +145,7 @@ Dado do mestre: {dm}
             if dj < dc:
                 fatkp = atkp * 0.75
 
-        # definição da força de defesa
+        # definição da força de defesa player
         if dm == dj:
             fdfp = dfj * 0.75
         else:
@@ -159,7 +159,7 @@ Dado do mestre: {dm}
         print(f"Sua força de defesa vale {fdfp}")
         print("")
 
-        # definição do ataque
+        # definição do ataque monstro
         if dc == dm:
             atkm = forçm + dexm
         else:
@@ -168,7 +168,7 @@ Dado do mestre: {dm}
             if dc < dm:
                 atkm = (forçm / 2) + (dexm / 2)
 
-        # definição da força de ataque
+        # definição da força de ataque monstro
         if dc == dj:
             fatkm = atkm
         else:
@@ -177,7 +177,7 @@ Dado do mestre: {dm}
             if dc < dj:
                 fatkm = atkm * 0.75
 
-        # definição da força de defesa
+        # definição da força de defesa monstro
         if dj == dc:
             fdfm = dfm * 0.75
         else:
@@ -229,6 +229,7 @@ Dado do mestre: {dm}
             print("Você morreu")
             print(f"Restou um total de {hpm} de HP do mob.")
             print(f"Total de {c} rodadas")
+            d += 1
             break
         if hpm < 0:
             print("Monstro derrotado")
