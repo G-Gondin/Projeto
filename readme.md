@@ -9,7 +9,7 @@ ds: dado de saida
 dsj: dado de saida jogador
 d: parametro de saida ou de morte
 sc: seleção da classe
-n1: parametro qualquer
+n1; n2: parametro qualquer
 cjg: classe do jogador
 atkm: ataque do monstro
 fatkm: força de ataque do monstro
@@ -33,3 +33,9 @@ dc: dado do monstro
 dm: dado do mestre
 atkdef: atacar ou defender
 dn: dano
+xpj: xp total do player
+nv: nivel do player
+x: parametro para subir de nível
+cont: contador de batalhas feitas
+pn: próximo nível
+xpg: parametro, a cada 5 batalhas +3 de xp
