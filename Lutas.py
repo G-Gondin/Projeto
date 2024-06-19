@@ -1,328 +1,314 @@
-from random import randint, choice
-from time import sleep
-xpj = 0
-nv = 1
-x = xpn = cont = 0
-pn = 10
+import random, time, lut
 
-cl = [{"classe": "Guerreiro", "vitalidade": 11, "força": 13, "destreza": 13, "resistencia": 11},
+xp_player = 0
+level = 1
+x = xp_level = cont = 0
+points_level = 10
+classes = [{"classe": "Guerreiro", "vitalidade": 11, "força": 13, "destreza": 13, "resistencia": 11},
       {"classe": "Cavaleiro", "vitalidade": 14, "força": 11, "destreza": 11, "resistencia": 10},
       {"classe": "Andarilho", "vitalidade": 10, "força": 10, "destreza": 14, "resistencia": 12}]
 mobs = [{"mob": "Guerreiro zombi", "vitalidade": 12, "força": 15, "destreza": 10, "resistencia": 9, "xp": 10},
         {"mob": "Zombi", "vitalidade": 8, "força": 7, "destreza": 5, "resistencia": 5, "xp": 8},
         {"mob": "Esqueleto", "vitalidade": 7, "força": 5, "destreza": 6, "resistencia": 3, "xp": 7}]
-def sorteio():
-    global d
-    while True:
-        ds = randint(1, 3)
-        dsj = randint(1, 3)
-        if dsj < ds:
-            print("Você tenta fugir e recebeu um ataque covarde nas costas e morreu.")
-            d += 1
-            break
-        if dsj > ds:
-            print("Você se vira e consegue fugir dele, porém no meio do caminho encontra com outro monstro")
-            break
-def linha():
-    print("-=-"*10)
+
 #lutas do inicio
 while True:
     cont += 1
-    #seleção da classe do pl
     if x == 0: 
+        #seleção da classe do pl
         while True:
-            sc = str(input("""[1] guerreiro
+            selection_class = str(input("""[1] guerreiro
 [2] cavaleiro
 [3] andarilho
-Selecione sua classe: """))
-            if sc not in "123":
-                while sc not in "123":
-                    sc = str(input("Erro, digite novamente: "))
-            if sc == "1":
-                sleep(0.8)
-                linha()
-                print(f"Seu nível é {nv}")
-                for k, v in cl[0].items():
+Selecione sua classe: """)).strip()
+            if selection_class not in "123":
+                while selection_class not in "123" or selection_class == "":
+                    selection_class = str(input("Erro, digite novamente: ")).strip()
+            if selection_class == "1":
+                time.sleep(0.8)
+                lut.linha()
+                print(f"Seu nível é {level}")
+                for k, v in classes[0].items():
                     print(f"A {k} é {v}")
-                linha()
-                sleep(0.8)
-                n1 = str(input("Tem certeza? [S/N] ")).strip().upper()
-                if n1 not in "SN":
-                    while n1 not in "SN":
-                        n1 = str(input("Erro, digite novamente: ")).strip().upper()
-                if n1 == "S":
-                    cjg = cl[0]
+                lut.linha()
+                time.sleep(0.8)
+                confirmation = str(input("Tem certeza? [S/N] ")).strip().upper()
+                if confirmation not in "SN":
+                    while confirmation not in "SN":
+                        confirmation = str(input("Erro, digite novamente: ")).strip().upper()
+                if confirmation == "S":
+                    class_player = classes[0]
                     break
-            if sc == "2":
-                sleep(0.8)
-                linha()
-                print(f"Seu nível é {nv}")
-                for k, v in cl[1].items():
+            if selection_class == "2":
+                time.sleep(0.8)
+                lut.linha()
+                print(f"Seu nível é {level}")
+                for k, v in classes[1].items():
                     print(f"A {k} é {v}")
-                linha()
-                sleep(0.8)
-                n1 = str(input("Tem certeza? [S/N] ")).strip().upper()
-                if n1 not in "SN":
-                    while n1 not in "SN":
-                        n1 = str(input("Erro, digite novamente: ")).strip().upper()
-                if n1 == "S":
-                    cjg = cl[1]
+                lut.linha()
+                time.sleep(0.8)
+                confirmation = str(input("Tem certeza? [S/N] ")).strip().upper()
+                if confirmation not in "SN":
+                    while confirmation not in "SN":
+                        confirmation = str(input("Erro, digite novamente: ")).strip().upper()
+                if confirmation == "S":
+                    class_player = classes[1]
                     break
-            if sc == "3":
-                sleep(0.8)
-                linha()
-                print(f"Seu nível é {nv}")
-                for k, v in cl[2].items():
+            if selection_class == "3":
+                time.sleep(0.8)
+                lut.linha()
+                print(f"Seu nível é {level}")
+                for k, v in classes[2].items():
                     print(f"A {k} é {v}")
-                linha()
-                sleep(0.8)
-                n1 = str(input("Tem certeza? [S/N] ")).strip().upper()
-                if n1 not in "SN":
-                    while n1 not in "SN":
-                        n1 = str(input("Erro, digite novamente: ")).strip().upper()
-                if n1 == "S":
-                    cjg = cl[2]
+                lut.linha()
+                time.sleep(0.8)
+                confirmation = str(input("Tem certeza? [S/N] ")).strip().upper()
+                if confirmation not in "SN":
+                    while confirmation not in "SN":
+                        confirmation = str(input("Erro, digite novamente: ")).strip().upper()
+                if confirmation == "S":
+                    class_player = classes[2]
                     break 
     
     #subir de nível
     if x >= 1:
-        if xpj >= pn:
+        if xp_player >= points_level:
             n2 = str(input("""Subiu de nível!
 [1] vitalidade
 [2] força
 [3] destreza
 [4] resistência
-Adicionar pontos em qual deles? """))
+Adicionar pontos em qual deles? """)).strip()
             if n2 not in "1234":
-                while n2 not in "1234":
-                    n2 = str(input("Erro, digite novamente: "))
+                while n2 not in "1234" or n2 == "":
+                    n2 = str(input("Erro, digite novamente: ")).strip()
             if n2 == '1':
-                cjg["vitalidade"] += 1
-                print(cjg["vitalidade"])
-                pn += pn*0.4
+                class_player["vitalidade"] += 1
+                print(class_player["vitalidade"])
+                points_level += points_level*0.4
             if n2 == '2':
-                cjg["força"] += 1
-                print(cjg["força"])
-                pn += pn*0.4
+                class_player["força"] += 1
+                print(class_player["força"])
+                points_level += points_level*0.4
             if n2 == '3':
-                cjg["destreza"] += 1
-                print(cjg["destreza"])
-                pn += pn*0.4
+                class_player["destreza"] += 1
+                print(class_player["destreza"])
+                points_level += points_level*0.4
             if n2 == '4':
-                cjg["resistencia"] += 1
-                print(cjg["resistencia"])
-                pn += pn*0.4
+                class_player["resistencia"] += 1
+                print(class_player["resistencia"])
+                points_level += points_level*0.4
         else:
-            print(f"Falta {pn-xpj} pontos de xp para subir de nível.")
+            print(f"Falta {points_level-xp_player} pontos de xp para subir de nível.")
 
-    atkm = fatkm = fdfm = 0
-    atkp = fatkp = fdfp = 0
+    attack_monster = attackforce_monster = defenseforce_monster = 0
+    attack_player = attackforce_player = defenseforce_player = 0
 
-    forçp = cjg['força']
-    dexp = cjg['destreza']
+    strength_player = class_player['força']
+    dexterity_player = class_player['destreza']
 
 
-    mobu = choice(mobs)
-    xpg = 0
+    chosen_mob = random.choice(mobs)
+    xp_monster = 0
     if cont % 5 == 0:
-        xpn += 3
-    xpg = mobu["xp"] + xpn
-    forçm = mobu['força']
-    dexm = mobu['destreza']
+        xp_level += 3
+    xp_monster = chosen_mob["xp"] + xp_level
+    
+    strength_monster = chosen_mob['força']
+    dexterity_monster = chosen_mob['destreza']
+
+    hp_player = class_player["vitalidade"] * 5
+    defense_palyer = class_player["resistencia"] + ((class_player["resistencia"]/2) * (class_player["vitalidade"]/4))
 
 
-    hpj = cjg["vitalidade"] * 5
-    dfj = cjg["resistencia"] + ((cjg["resistencia"]/2) * (cjg["vitalidade"]/4))
-
-
-    hpm = mobu["vitalidade"] * 5
-    dfm = mobu["resistencia"] + ((mobu["resistencia"]/2) * (mobu["vitalidade"]/4))
-    c = d = 0
+    hp_monster = chosen_mob["vitalidade"] * 5
+    defense_monster = chosen_mob["resistencia"] + ((chosen_mob["resistencia"]/2) * (chosen_mob["vitalidade"]/4))
+    count_round = defeated = 0
 
     #luta em si
     while True:
-        if c == 0:
+        if count_round == 0:
             print(f"""
-analise da batalha, você escolheu a classe: {cjg['classe']}, seus statos são:
-            vitalidade: {cjg['vitalidade']};
-            força: {cjg['força']};
-            destreza: {cjg['destreza']};
-            resistencia: {cjg['resistencia']}.
+analise da batalha, você escolheu a classe: {class_player['classe']}, seus statos são:
+            vitalidade: {class_player['vitalidade']};
+            força: {class_player['força']};
+            destreza: {class_player['destreza']};
+            resistencia: {class_player['resistencia']}.
 
-            Seu HP é de {hpj} pontos;
-            E sua defesa é de {dfj:.2f} pontos
+            Seu HP é de {hp_player} pontos;
+            E sua defesa é de {defense_palyer:.2f} pontos
 """)
-            sleep(2)
-            print(f"""analise da batalha, o mob selecionado foi: {mobu['mob']}, seus statos são:
-            vitalidade: {mobu['vitalidade']};
-            força: {mobu['força']};
-            destreza: {mobu['destreza']};
-            resistencia: {mobu['resistencia']}.
+            time.sleep(2)
+            print(f"""analise da batalha, o mob selecionado foi: {chosen_mob['mob']}, seus statos são:
+            vitalidade: {chosen_mob['vitalidade']};
+            força: {chosen_mob['força']};
+            destreza: {chosen_mob['destreza']};
+            resistencia: {chosen_mob['resistencia']}.
 
-            Seu HP é de {hpm} pontos;
-            E sua defesa é de {dfm:.2f} pontos
+            Seu HP é de {hp_monster} pontos;
+            E sua defesa é de {defense_monster:.2f} pontos
 """)
-            pb = str(input("Tendo isso em mente, deseja prosseguir com a batalha? [S/N]")).strip().upper()
-            if pb not in "SN":
-                while pb not in "SN":
-                    pb = str(input("Erro, digite novamente: ")).strip().upper()
-            if pb == "N":
-                sorteio()
-                if d >= 1:
+            progress_to_battle = str(input("Tendo isso em mente, deseja prosseguir com a batalha? [S/N]")).strip().upper()
+            if progress_to_battle not in "SN":
+                while progress_to_battle not in "SN":
+                    progress_to_battle = str(input("Erro, digite novamente: ")).strip().upper()
+            if progress_to_battle == "N":
+                lut.sorteio()
+                if defeated >= 1:
                     break
-        c += 1
+        count_round += 1
         print()
-        print(f"Rodada {c}")
-        dj = randint(1, 5)
-        dc = randint(1, 5)
-        dm = randint(1, 5)
+        print(f"Rodada {count_round}")
+        dice_player = random.randint(1, 5)
+        dice_monster = random.randint(1, 5)
+        dice_master = random.randint(1, 5)
         print("Rolando dados")
-        sleep(0.5)
-        print(f"""Dado do jogador: {dj}
-Dado do monstro: {dc}
-Dado do mestre: {dm}
+        time.sleep(0.5)
+        print(f"""Dado do jogador: {dice_player}
+Dado do monstro: {dice_monster}
+Dado do mestre: {dice_master}
 """)
 
         # definição de ataque player
-        if dj == dm:
-            atkp = forçp + dexp
+        if dice_player == dice_master:
+            attack_player = strength_player + dexterity_player
         else:
-            if dj > dm:
-                atkp = (forçp / 2) + dexp
-            if dj < dm:
-                atkp = (forçp / 2) + (dexp / 2)
+            if dice_player > dice_master:
+                attack_player = (strength_player / 2) + dexterity_player
+            if dice_player < dice_master:
+                attack_player = (strength_player / 2) + (dexterity_player / 2)
 
         # definição da força de ataque player
-        if dj == dc:
-            fatkp = atkp
+        if dice_player == dice_monster:
+            attackforce_player = attack_player
         else:
-            if dj > dc:
-                fatkp = atkp * 1.5
-            if dj < dc:
-                fatkp = atkp * 0.75
+            if dice_player > dice_monster:
+                attackforce_player = attack_player * 1.5
+            if dice_player < dice_monster:
+                attackforce_player = attack_player * 0.75
 
         # definição da força de defesa player
-        if dm == dj:
-            fdfp = dfj * 0.75
+        if dice_master == dice_player:
+            defenseforce_player = defense_palyer * 0.75
         else:
-            if dm > dj:
-                fdfp = dfj * 0.5
-            if dm < dj:
-                fdfp = dfj
+            if dice_master > dice_player:
+                defenseforce_player = defense_palyer * 0.5
+            if dice_master < dice_player:
+                defenseforce_player = defense_palyer
         
-        linha()
-        print(f"Seu ataque vale {atkp}")
-        print(f"Sua força de ataque vale {fatkp}")
-        print(f"Sua defesa vale {dfj}")
-        print(f"Sua força de defesa vale {fdfp}")
-        linha()
+        lut.linha()
+        print(f"Seu ataque vale {attack_player}")
+        print(f"Sua força de ataque vale {attackforce_player}")
+        print(f"Sua defesa vale {defense_palyer}")
+        print(f"Sua força de defesa vale {defenseforce_player}")
+        lut.linha()
         print("")
 
         # definição do ataque monstro
-        if dc == dm:
-            atkm = forçm + dexm
+        if dice_monster == dice_master:
+            attack_monster = strength_monster + dexterity_monster
         else:
-            if dc > dm:
-                atkm = (forçm / 2) + dexm
-            if dc < dm:
-                atkm = (forçm / 2) + (dexm / 2)
+            if dice_monster > dice_master:
+                attack_monster = (strength_monster / 2) + dexterity_monster
+            if dice_monster < dice_master:
+                attack_monster = (strength_monster / 2) + (dexterity_monster / 2)
 
         # definição da força de ataque monstro
-        if dc == dj:
-            fatkm = atkm
+        if dice_monster == dice_player:
+            attackforce_monster = attack_monster
         else:
-            if dc > dj:
-                fatkm = atkm * 1.5
-            if dc < dj:
-                fatkm = atkm * 0.75
+            if dice_monster > dice_player:
+                attackforce_monster = attack_monster * 1.5
+            if dice_monster < dice_player:
+                attackforce_monster = attack_monster * 0.75
 
         # definição da força de defesa monstro
-        if dm == dc:
-            fdfm = dfm * 0.75
+        if dice_master == dice_monster:
+            defenseforce_monster = defense_monster * 0.75
         else:
-            if dm > dc:
-                fdfm = dfm * 0.5
-            if dm < dc:
-                fdfm = dfm
+            if dice_master > dice_monster:
+                defenseforce_monster = defense_monster * 0.5
+            if dice_master < dice_monster:
+                defenseforce_monster = defense_monster
         
-        linha()
-        print(f"O ataque do mob vale {atkm}")
-        print(f"A força de ataque do mob vale {fatkm}")
-        print(f"A defesa do mob vale {dfm}")
-        print(f"A força de defesa do mob vale {fdfm}")
-        linha()
+        lut.linha()
+        print(f"O ataque do mob vale {attack_monster}")
+        print(f"A força de ataque do mob vale {attackforce_monster}")
+        print(f"A defesa do mob vale {defense_monster}")
+        print(f"A força de defesa do mob vale {defenseforce_monster}")
+        lut.linha()
 
-        atkdef = str(input("""[1] atacar
+        attack_or_defend = str(input("""[1] atacar
 [2] defender
-qual a sua escolha? """))
-        if atkdef not in "12":
-            while atkdef not in "12":
-                atkdef = str(input("Erro, digite novamente: ")).upper().strip()
-        if atkdef == "1":
-            if fatkp == fdfm:
+qual a sua escolha? """)).strip()
+        if attack_or_defend not in "12" or attack_or_defend == "":
+            while attack_or_defend not in "12" or attack_or_defend == "":
+                attack_or_defend = str(input("Erro, digite novamente: ")).upper().strip()
+        if attack_or_defend == "1":
+            if attackforce_player == defenseforce_monster:
                 print("Nulo")
             else:
-                if fatkp > fdfm:
-                    dn = fatkp - fdfm
-                    hpm -= dn
-                    linha()
-                    print(f"Deu dano de {dn} pontos")
-                    print(f"O HP do monstro foi de {hpm+dn} para {hpm}.")
-                    linha()
+                if attackforce_player > defenseforce_monster:
+                    damage = attackforce_player - defenseforce_monster
+                    hp_monster -= damage
+                    lut.linha()
+                    print(f"Deu dano de {damage} pontos")
+                    print(f"O HP do monstro foi de {hp_monster+damage} para {hp_monster}.")
+                    lut.linha()
                     print()
-                if fatkp < fdfm:
-                    dn = fdfm - fatkp
-                    hpj -= dn
-                    linha()
-                    print(f"Tomou dano de {dn} pontos")
-                    print(f"O seu HP foi de {hpj + dn} para {hpj}.")
-                    linha()
+                if attackforce_player < defenseforce_monster:
+                    damage = defenseforce_monster - attackforce_player
+                    hp_player -= damage
+                    lut.linha()
+                    print(f"Tomou dano de {damage} pontos")
+                    print(f"O seu HP foi de {hp_player + damage} para {hp_player}.")
+                    lut.linha()
                     print()
-        if atkdef == "2":
-            if fatkm == fdfp:
+        if attack_or_defend == "2":
+            if attackforce_monster == defenseforce_player:
                 print("Nulo")
             else:
-                if fatkm > fdfp:
-                    dn = fatkm - fdfp
-                    hpj -= dn
-                    linha()
-                    print(f"Tomou dano de {dn} pontos")
-                    print(f"O seu HP foi de {hpj + dn} para {hpj}.")
-                    linha()
+                if attackforce_monster > defenseforce_player:
+                    damage = attackforce_monster - defenseforce_player
+                    hp_player -= damage
+                    lut.linha()
+                    print(f"Tomou dano de {damage} pontos")
+                    print(f"O seu HP foi de {hp_player + damage} para {hp_player}.")
+                    lut.linha()
                     print()
-                if fatkm < fdfp:
-                    dn = fdfp - fatkm
-                    hpm -= dn
-                    linha()
-                    print(f"Deu dano de {dn} pontos")
-                    print(f"O HP do monstro foi de {hpm+dn} para {hpm}.")
-                    linha()
+                if attackforce_monster < defenseforce_player:
+                    damage = defenseforce_player - attackforce_monster
+                    hp_monster -= damage
+                    lut.linha()
+                    print(f"Deu dano de {damage} pontos")
+                    print(f"O HP do monstro foi de {hp_monster+damage} para {hp_monster}.")
+                    lut.linha()
                     print()
-        if hpj < 0:
-            sleep(2)
-            linha()
+        if hp_player < 0:
+            time.sleep(2)
+            lut.linha()
             print("Você morreu")
-            print(f"Restou um total de {hpm} de HP do mob.")
-            print(f"Total de {c} rodadas")
-            linha()
-            sleep(2)
-            d += 1
+            print(f"Restou um total de {hp_monster} de HP do mob.")
+            print(f"Total de {count_round} rodadas")
+            lut.linha()
+            time.sleep(2)
+            defeated += 1
             break
-        if hpm < 0:
-            sleep(2)
-            linha()
+        if hp_monster < 0:
+            time.sleep(2)
+            lut.linha()
             print("Monstro derrotado")
-            print(f"Te restou um total de {hpj} de HP.")
-            print(f"Total de {c} rodadas")
-            linha()
-            sleep(1)
+            print(f"Te restou um total de {hp_player} de HP.")
+            print(f"Total de {count_round} rodadas")
+            lut.linha()
+            time.sleep(1)
             x += 1
-            xpj += xpg
-            print(f"Mais {mobu['xp']} pontos de xp")
-            print(f"Xp total de {xpj}")
-            linha()
-            sleep(2)
+            xp_player += xp_monster
+            print(f"Mais {chosen_mob['xp']} pontos de xp")
+            print(f"Xp total de {xp_player}")
+            lut.linha()
+            time.sleep(2)
             break
-    if d >= 1:
+    if defeated >= 1:
         break
 print("Fim")
