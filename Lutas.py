@@ -11,8 +11,8 @@ mobs = [{"mob": "Guerreiro zombi", "vitalidade": 12, "força": 15, "destreza": 1
         {"mob": "Zombi", "vitalidade": 8, "força": 7, "destreza": 5, "resistencia": 5, "xp": 8},
         {"mob": "Esqueleto", "vitalidade": 7, "força": 5, "destreza": 6, "resistencia": 3, "xp": 7}]
 
-#lutas do inicio
 while True:
+    #lutas do inicio
     cont += 1
     if x == 0: 
         #seleção da classe do pl
@@ -21,9 +21,9 @@ while True:
 [2] cavaleiro
 [3] andarilho
 Selecione sua classe: """)).strip()
-            if selection_class not in "123":
+            if selection_class not in "123" or selection_class == "":
                 while selection_class not in "123" or selection_class == "":
-                    selection_class = str(input("Erro, digite novamente: ")).strip()
+                    selection_class = str(input(lut.cor("Erro, digite novamente: ", "vermelho"))).strip()
             if selection_class == "1":
                 time.sleep(0.8)
                 lut.linha()
@@ -33,9 +33,9 @@ Selecione sua classe: """)).strip()
                 lut.linha()
                 time.sleep(0.8)
                 confirmation = str(input("Tem certeza? [S/N] ")).strip().upper()
-                if confirmation not in "SN":
-                    while confirmation not in "SN":
-                        confirmation = str(input("Erro, digite novamente: ")).strip().upper()
+                if confirmation not in "SN" or confirmation == "":
+                    while confirmation not in "SN" or confirmation == "":
+                        confirmation = str(input(lut.cor("Erro, digite novamente: ", "vermelho"))).strip().upper()
                 if confirmation == "S":
                     class_player = classes[0]
                     break
@@ -48,9 +48,9 @@ Selecione sua classe: """)).strip()
                 lut.linha()
                 time.sleep(0.8)
                 confirmation = str(input("Tem certeza? [S/N] ")).strip().upper()
-                if confirmation not in "SN":
-                    while confirmation not in "SN":
-                        confirmation = str(input("Erro, digite novamente: ")).strip().upper()
+                if confirmation not in "SN" or confirmation == "":
+                    while confirmation not in "SN" or confirmation == "":
+                        confirmation = str(input(lut.cor("Erro, digite novamente: ", "vermelho"))).strip().upper()
                 if confirmation == "S":
                     class_player = classes[1]
                     break
@@ -63,9 +63,9 @@ Selecione sua classe: """)).strip()
                 lut.linha()
                 time.sleep(0.8)
                 confirmation = str(input("Tem certeza? [S/N] ")).strip().upper()
-                if confirmation not in "SN":
-                    while confirmation not in "SN":
-                        confirmation = str(input("Erro, digite novamente: ")).strip().upper()
+                if confirmation not in "SN" or confirmation == "":
+                    while confirmation not in "SN" or confirmation == "":
+                        confirmation = str(input(lut.cor("Erro, digite novamente: ", "vermelho"))).strip().upper()
                 if confirmation == "S":
                     class_player = classes[2]
                     break 
@@ -81,7 +81,7 @@ Selecione sua classe: """)).strip()
 Adicionar pontos em qual deles? """)).strip()
             if n2 not in "1234":
                 while n2 not in "1234" or n2 == "":
-                    n2 = str(input("Erro, digite novamente: ")).strip()
+                    n2 = str(input(lut.cor("Erro, digite novamente: ", "vermelho"))).strip()
             if n2 == '1':
                 class_player["vitalidade"] += 1
                 print(class_player["vitalidade"])
@@ -129,7 +129,7 @@ Adicionar pontos em qual deles? """)).strip()
     while True:
         if count_round == 0:
             print(f"""
-analise da batalha, você escolheu a classe: {class_player['classe']}, seus statos são:
+analise da batalha, você escolheu a classe: {class_player['classe']}, seus status são:
             vitalidade: {class_player['vitalidade']};
             força: {class_player['força']};
             destreza: {class_player['destreza']};
@@ -139,7 +139,7 @@ analise da batalha, você escolheu a classe: {class_player['classe']}, seus stat
             E sua defesa é de {defense_palyer:.2f} pontos
 """)
             time.sleep(2)
-            print(f"""analise da batalha, o mob selecionado foi: {chosen_mob['mob']}, seus statos são:
+            print(f"""O mob selecionado foi: {chosen_mob['mob']}, seus status são:
             vitalidade: {chosen_mob['vitalidade']};
             força: {chosen_mob['força']};
             destreza: {chosen_mob['destreza']};
@@ -149,19 +149,19 @@ analise da batalha, você escolheu a classe: {class_player['classe']}, seus stat
             E sua defesa é de {defense_monster:.2f} pontos
 """)
             progress_to_battle = str(input("Tendo isso em mente, deseja prosseguir com a batalha? [S/N]")).strip().upper()
-            if progress_to_battle not in "SN":
-                while progress_to_battle not in "SN":
-                    progress_to_battle = str(input("Erro, digite novamente: ")).strip().upper()
+            if progress_to_battle not in "SN" or progress_to_battle == "":
+                while progress_to_battle not in "SN" or progress_to_battle == "":
+                    progress_to_battle = str(input(lut.cor("Erro, digite novamente: ","vermelho"))).strip().upper()
             if progress_to_battle == "N":
-                lut.sorteio()
+                defeated = lut.sorteio()
                 if defeated >= 1:
                     break
         count_round += 1
         print()
         print(f"Rodada {count_round}")
-        dice_player = random.randint(1, 5)
-        dice_monster = random.randint(1, 5)
-        dice_master = random.randint(1, 5)
+        dice_player = random.randint(1, 6)
+        dice_monster = random.randint(1, 6)
+        dice_master = random.randint(1, 6)
         print("Rolando dados")
         time.sleep(0.5)
         print(f"""Dado do jogador: {dice_player}
@@ -243,10 +243,10 @@ Dado do mestre: {dice_master}
 qual a sua escolha? """)).strip()
         if attack_or_defend not in "12" or attack_or_defend == "":
             while attack_or_defend not in "12" or attack_or_defend == "":
-                attack_or_defend = str(input("Erro, digite novamente: ")).upper().strip()
+                attack_or_defend = str(input(lut.cor("Erro, digite novamente: ","vermelho"))).upper().strip()
         if attack_or_defend == "1":
             if attackforce_player == defenseforce_monster:
-                print("Nulo")
+                print("Seu ataque foi nulo")
             else:
                 if attackforce_player > defenseforce_monster:
                     damage = attackforce_player - defenseforce_monster
